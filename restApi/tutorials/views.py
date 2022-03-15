@@ -40,3 +40,29 @@ def tutorial_list(request):
             {"message": "{} Tutorials were deleted successfully!".format(count[0])},
             status=status.HTTP_204_NO_CONTENT,
         )
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def tutorial_detail(request, pk):
+    try:
+        tutorial = Tutorial.objects.get(pk=pk)
+    except Tutorial.DoesNotExist:
+        return JsonResponse({'message': 'the tutorial doesnot exist'}, status=status.HTTP_404_NOT_FOUND)
+
+
+    if request.method == 'GET':
+        tutorial_serializer = TutorialSerializer(tutorial)
+        return JsonResponse(tutorial_serializer.data)
+
+    elif request.method == 'PUT':
+        tutorial_data = JSONParser().parse(request)
+        tutorial_serializer = TutorialSerializer(tutorial, data=tutorial_data)
+        if tutorial_serializer.is_valid():
+            tutorial_serializer.save()
+            return JsonResponse(tutorial_serializer.data)
+        
+        return JsonResponse(tutorial_serializer.errrors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        tutorial.delete()
+        return JsonResponse({'message': 'tutorial was deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+        
