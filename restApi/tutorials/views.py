@@ -65,4 +65,13 @@ def tutorial_detail(request, pk):
     elif request.method == 'DELETE':
         tutorial.delete()
         return JsonResponse({'message': 'tutorial was deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-        
+
+
+@api_view(['GET'])
+def tutorial_list_published(request):
+    tutorials = Tutorial.objects.filter(published=True)
+    
+    if request.method == 'GET':
+        tutorials_serializer = TutorialSerializer(tutorials, many=True)
+        return JsonResponse(tutorials_serializer.data, safe=False)
+
