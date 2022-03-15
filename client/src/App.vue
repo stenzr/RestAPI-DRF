@@ -88,7 +88,69 @@
 
 <script>
 
+import http from "./http-common";
 
+export default {
+  name: "App",
+  data() {
+    return {
+      getResult: null,
+      postResult: null,
+      putResult: null,
+      deleteResult: null,
+    }
+  },
+  methods: {
+    fortmatResponse(res) {
+      return JSON.stringify(res, null, 2);
+    },
+
+    async getAllData() {
+
+    },
+
+    async getDataById() {
+
+    },
+
+    async getDataByTitle() {
+
+    },
+
+    async postData() {
+
+    },
+
+    async putData() {
+
+    },
+
+    async deleteAllData() {
+
+    },
+
+    async deleteDataById() {
+
+    },
+
+    clearGetOutput() {
+      this.getResult = null;
+
+    },
+
+    clearPostOutput() {
+      this.postResult = null;
+    },
+    
+    clearPutOutput() {
+      this.putResult = null;
+    },
+    
+    clearDeleteOutput() {
+      this.deleteResult = null;
+    } 
+  }
+}
 </script>
 
 
