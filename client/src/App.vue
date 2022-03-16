@@ -169,7 +169,28 @@ export default {
     },
 
     async postData() {
+      const postData = {
+        title: this.$refs.post_title.value,
+        description: this.$refs.post_description.value,
+      };
 
+      try {
+        const res = await http.post("/tutorials", postData, {
+          headers: {
+            "x-access-token": "token-value",
+          },
+        });
+
+        const result = {
+          status: res.status + "-" + res.statusText,
+          headers: res.headers,
+          data: res.data,
+        };
+
+        this.postResult = this.formatApiResponse(result);
+      } catch (err) {
+        this.postResult = this.formatApiResponse(err.response?.data) || err;
+      }
     },
 
     async putData() {
