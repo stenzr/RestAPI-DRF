@@ -235,9 +235,9 @@ export default {
           data: res.data,
         };
 
-        this.deleteResult = this.fortmatResponse(result);
+        this.deleteResult = this.formatApiResponse(result);
       } catch (err) {
-        this.deleteResult = this.fortmatResponse(err.response?.data) || err;
+        this.deleteResult = this.formatApiResponse(err.response?.data) || err;
       }     
     },
 
@@ -251,10 +251,10 @@ export default {
             headers: res.headers,
             data: res.data,
           };
-          
-          this.deleteResult = this.fortmatResponse(result);
+
+          this.deleteResult = this.formatApiResponse(result);
         } catch (err) {
-          this.deleteResult = this.fortmatResponse(err.response?.data) || err;
+          this.deleteResult = this.formatApiResponse(err.response?.data) || err;
         }
       }
     },
