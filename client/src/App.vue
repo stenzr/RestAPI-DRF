@@ -143,7 +143,29 @@ export default {
     },
 
     async getDataByTitle() {
-      
+      const title = this.$refs.get_title.value;
+
+      if(title) {
+        try {
+          const res = await http.get("/tutorials", {
+            params: {
+              title: title,
+            },
+          });
+
+          const result = {
+            status: res.status + "-" + res.statusText,
+            headers: res.headers,
+            data: res.data,
+          };
+
+          this.getResult = this.formatApiResponse(result);
+
+          } catch(err) {
+            this.getResult = this.formatApiResponse(err.response?.data) || err;
+          }
+        }
+      }
     },
 
     async postData() {
