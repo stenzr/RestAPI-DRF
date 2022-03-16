@@ -122,11 +122,28 @@ export default {
     },
 
     async getDataById() {
+      const id = this.$refs.get_id.value;
 
+      if(id) {
+        try {
+          const res = await http.get(`/tutorials/${id}`);
+
+          const result = {
+            status: res.status + "-" + res.statusText,
+            headers: res.headers,
+            data: res.data,
+          };
+
+          this.getResult = this.formatApiResponse(result);
+
+        } catch (err) {
+          this.getResult = this.formatApiResponse(err.response?.data) || err;
+        }
+      }
     },
 
     async getDataByTitle() {
-
+      
     },
 
     async postData() {
