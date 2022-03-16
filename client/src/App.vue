@@ -234,7 +234,7 @@ export default {
           headers: res.headers,
           data: res.data,
         };
-        
+
         this.deleteResult = this.fortmatResponse(result);
       } catch (err) {
         this.deleteResult = this.fortmatResponse(err.response?.data) || err;
@@ -242,7 +242,21 @@ export default {
     },
 
     async deleteDataById() {
-
+      const id = this.$refs.delete_id.value;
+      if (id) {
+        try {
+          const res = await http.delete(`/tutorials/${id}`);
+          const result = {
+            status: res.status + "-" + res.statusText,
+            headers: res.headers,
+            data: res.data,
+          };
+          
+          this.deleteResult = this.fortmatResponse(result);
+        } catch (err) {
+          this.deleteResult = this.fortmatResponse(err.response?.data) || err;
+        }
+      }
     },
 
     clearGetOutput() {
