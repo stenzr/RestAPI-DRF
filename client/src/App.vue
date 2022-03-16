@@ -165,8 +165,8 @@ export default {
             this.getResult = this.formatApiResponse(err.response?.data) || err;
           }
         }
-      }
-    },
+      },
+    
 
     async postData() {
       const postData = {
@@ -194,7 +194,7 @@ export default {
     },
 
     async putData() {
-
+      
     },
 
     async deleteAllData() {
@@ -220,9 +220,10 @@ export default {
     
     clearDeleteOutput() {
       this.deleteResult = null;
-    } 
+    }  
   }
 }
+
 </script>
 
 
