@@ -227,7 +227,18 @@ export default {
     },
 
     async deleteAllData() {
-      
+      try {
+        const res = await http.delete("/tutorials");
+        const result = {
+          status: res.status + "-" + res.statusText,
+          headers: res.headers,
+          data: res.data,
+        };
+        
+        this.deleteResult = this.fortmatResponse(result);
+      } catch (err) {
+        this.deleteResult = this.fortmatResponse(err.response?.data) || err;
+      }     
     },
 
     async deleteDataById() {
