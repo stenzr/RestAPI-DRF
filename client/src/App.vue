@@ -175,11 +175,7 @@ export default {
       };
 
       try {
-        const res = await http.post("/tutorials", postData, {
-          headers: {
-            "x-access-token": "token-value",
-          },
-        });
+        const res = await http.post("/tutorials", postData);
 
         const result = {
           status: res.status + "-" + res.statusText,
@@ -206,11 +202,7 @@ export default {
         };
 
         try {
-          const res = await http.put(`/tutorials/${id}`, putData, {
-            headers: {
-              "x-access-token": "token-value",
-            },
-          });
+          const res = await http.put(`/tutorials/${id}`, putData);
 
           const result = {
             status: res.status + "-" + res.statusText,
