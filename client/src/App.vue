@@ -101,12 +101,24 @@ export default {
     }
   },
   methods: {
-    fortmatResponse(res) {
+    formatApiResponse(res) {
       return JSON.stringify(res, null, 2);
     },
 
     async getAllData() {
+      try {
+        const res = await http.get("/tutorials");
 
+        const result = {
+          status: res.status + "-" + res.statusText,
+          headers: res.headers,
+          data: res.data,
+        };
+
+        this.getResult = this.formatApiResponse(result);
+      } catch(err) {
+        this.getResult = this.formatApiResponse(err.response?.data) || err;
+      }
     },
 
     async getDataById() {
